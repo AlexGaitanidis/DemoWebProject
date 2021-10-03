@@ -46,14 +46,30 @@ namespace DemoWebAPI.Controllers
 
         // PUT api/<CustomersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateCustomerCommand command)
         {
+            command.Id = id;
+
+            var result = await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest();
+
+            return Ok();
         }
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var command = new DeleteCustomerCommand(id);
+
+            var result = await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest();
+
+            return NoContent();
         }
     }
 }

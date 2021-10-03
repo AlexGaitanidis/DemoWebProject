@@ -18,9 +18,18 @@ namespace DemoLibrary.Models
         [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
-        public List<Address> Addresses { get; set; } = new();
-        public List<Email> EmailAddresses { get; set; } = new();
-        public List<Phone> PhoneNumbers { get; set; } = new();
+        public List<Address> Addresses { get; set; }
+        public List<Email> EmailAddresses { get; set; }
+        public List<Phone> PhoneNumbers { get; set; }
 
+        public void UpdateInfo(string firstName, string lastName, List<Address> addresses, List<Email> emailAddresses,
+            List<Phone> phoneNumbers)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Addresses = addresses;
+            EmailAddresses = emailAddresses;
+            PhoneNumbers = phoneNumbers;
+        }
     }
 }
