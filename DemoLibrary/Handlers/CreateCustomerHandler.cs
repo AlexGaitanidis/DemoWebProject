@@ -18,14 +18,7 @@ namespace DemoLibrary.Handlers
 
         public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = new Customer
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Addresses = request.Addresses,
-                EmailAddresses = request.EmailAddresses,
-                PhoneNumbers = request.PhoneNumbers
-            };
+            var customer = new Customer(request.FirstName, request.LastName, request.Addresses, request.EmailAddresses, request.PhoneNumbers);
 
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync(cancellationToken);
